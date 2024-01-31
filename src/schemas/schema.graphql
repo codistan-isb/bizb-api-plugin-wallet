@@ -1,0 +1,27 @@
+enum TransactionType {
+  inBound
+  outBound
+}
+
+type wallet {
+  id: ID!
+  amount: Int!
+  userId: ID!
+  transactions: TransactionType
+  paymentProcessor: String!
+}
+
+type Query {
+  getWalletById(walletId: ID!): Wallet
+}
+
+type Mutation {
+  createWallet(userId: ID!, amount: Int!, paymentProcessor: String!): Wallet
+  updateWalletAmount(walletId: ID!, newAmount: Int!): Wallet
+  makeTransaction(
+    walletId: ID!
+    transactionType: TransactionType!
+    amount: Int!
+  ): Wallet
+  deleteWallet(walletId: ID!): ID
+}
