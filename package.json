@@ -1,19 +1,18 @@
 {
   "name": "@codistan-isb/bizb-api-plugin-wallet",
   "description": "Reaction API plugin for wallet",
-  "label": "Example Plugin",
   "version": "0.0.1-development",
   "main": "index.js",
   "type": "module",
   "engines": {
     "node": ">=14.18.1"
   },
-  "homepage": "https://github.com/reactioncommerce/api-plugin-example",
-  "url": "https://github.com/reactioncommerce/api-plugin-example",
+  "homepage": "https://github.com/RehanMaroof/bizb-api-plugin-wallet",
+  "url": "https://github.com/RehanMaroof/bizb-api-plugin-wallet",
   "email": "hello-open-commerce@mailchimp.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/reactioncommerce/api-plugin-example.git"
+    "url": "git+https://github.com/RehanMaroof/bizb-api-plugin-wallet.git"
   },
   "author": {
     "name": "Mailchimp Open Commerce",
@@ -22,7 +21,7 @@
   },
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/reactioncommerce/api-plugin-example/issues"
+    "url": "https://github.com/RehanMaroof/bizb-api-plugin-wallet/issues"
   },
   "sideEffects": false,
   "dependencies": {
