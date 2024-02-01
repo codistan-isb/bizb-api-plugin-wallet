@@ -3,25 +3,28 @@ enum TransactionType {
   outBound
 }
 
-type wallet {
-  id: ID!
-  amount: Int!
-  userId: ID!
+type wallets implements Node {
+  _id: ID!
+  amount: Int
+  userId: ID
   transactions: TransactionType
-  paymentProcessor: String!
+  paymentProcessor: String
+  createdAt: DateTime
+  updatedAt: DateTime
 }
 
+
 type Query {
-  getWalletById(walletId: ID!): Wallet
+  getWalletById(walletId: ID!): wallets
 }
 
 type Mutation {
-  createWallet(userId: ID!, amount: Int!, paymentProcessor: String!): Wallet
-  updateWalletAmount(walletId: ID!, newAmount: Int!): Wallet
+  createWallet(userId: ID!, amount: Int!, paymentProcessor: String!): wallets
+  updateWalletAmount(userId: ID!, newAmount: Int!): wallets
   makeTransaction(
-    walletId: ID!
-    transactionType: TransactionType!
+    userId: ID!
+    transactions: TransactionType!
     amount: Int!
-  ): Wallet
+  ): wallets
   deleteWallet(walletId: ID!): ID
 }

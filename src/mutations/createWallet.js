@@ -10,8 +10,9 @@ export default async function createWallet(parent, args, context, info) {
             createdAt: new Date(),
             updatedAt: new Date()
         });
-        console.log('wallet', wallet);  
-        return wallet;
+        console.log('wallet', wallet.ops[0]);  
+        const wallets = wallet.ops[0];
+        return wallets;
         
 
 }
