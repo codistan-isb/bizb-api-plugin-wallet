@@ -1,7 +1,10 @@
 import { createRequire } from "module";
-
 const require = createRequire(import.meta.url);
 const pkg = require("../package.json");
+import schemas from "./schemas/index.js";
+import resolvers from "./resolvers/index.js";
+import queries from "./queries/index.js";
+import mutations from "./mutations/index.js";
 
 /**
  * @summary Import and call this function to add this plugin to your API.
@@ -9,14 +12,21 @@ const pkg = require("../package.json");
  * @returns {undefined}
  */
 export default async function register(app) {
+  console.log('registering plugin wallet');
   await app.registerPlugin({
-    label: "bizb-api-plugin-wallet",
-    name: "bizb-api-plugin-wallet",
+    label: pkg.label,
+    name: pkg.name,
     version: pkg.version,
     collections: {
-      Wallet: {
-        name: "Wallet",
+      Wallets: {
+        name: "Wallets",
       },
     },
+    graphQL: {
+      schemas,
+      resolvers
+    },
+    queries,
+    mutations,
   });
 }
