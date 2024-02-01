@@ -1,3 +1,4 @@
+import ReactionError from "@reactioncommerce/reaction-error";
 export default async function makeTransaction(parent, args, context, info) {
     const { collections } = context;
     const { Wallets } = collections;
@@ -8,7 +9,7 @@ export default async function makeTransaction(parent, args, context, info) {
   
     // Validate input
     if (!userId || !transactions || !amount) {
-      throw new Error('Invalid input. Please provide userId, transactionType, and amount.');
+      throw new ReactionError("Invalid Input",'Invalid input. Please provide userId, transactionType, and amount.');
     }
   
     try {
@@ -16,7 +17,7 @@ export default async function makeTransaction(parent, args, context, info) {
       const wallet = await Wallets.findOne({ userId: userId });
   
       if (!wallet) {
-        throw new Error('Wallet not found.');
+        throw new ReactionError("Not found",'Wallet not found.');
       }
   
       // Update the wallet based on the transaction type
@@ -25,12 +26,12 @@ export default async function makeTransaction(parent, args, context, info) {
         wallet.transactions = 'inBound';
       } else if (transactions === 'outBound') {
         if (wallet.amount < amount) {
-          throw new Error('Insufficient funds for outbound transaction.');
+          throw new ReactionError('Insufficient funds for outbound transaction.');
         }
         wallet.amount -= amount;
         wallet.transactions = 'outBound';
       } else {
-        throw new Error('Invalid transaction type. Use "INBOUND" or "OUTBOUND".');
+        throw new ReactionError("Invalid transaction type",'Invalid transaction type. Use "INBOUND" or "OUTBOUND".');
       }
   
       // Save the updated wallet
@@ -40,7 +41,7 @@ export default async function makeTransaction(parent, args, context, info) {
       return wallet;
     } catch (error) {
       console.error('Error making transaction:', error);
-      throw new Error('Failed to make transaction.');
+      throw new ReactionError("Failed to make transaction ",'Failed to make transaction.');
     }
   }
   

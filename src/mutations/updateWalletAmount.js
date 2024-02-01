@@ -6,7 +6,7 @@ export default async function updateWalletAmount(parent, args, context, info) {
   
     // Validate input
     if (!userId || !newAmount) {
-      throw new ReactionError('Invalid input. Please provide userId and newAmount.');
+      throw new ReactionError('Invalid input','Invalid input. Please provide userId and newAmount.');
     }
   
     try {
@@ -18,13 +18,13 @@ export default async function updateWalletAmount(parent, args, context, info) {
       );
   console.log('updatedWallet', updatedWallet);
       if (!updatedWallet) {
-        throw new ReactionError('Wallet not found.');
+        throw new ReactionError("Wallet not found.",'Wallet not found.');
       }
   
       return updatedWallet.value;
     } catch (error) {
       console.error('Error updating wallet amount:', error);
-      throw new ReactionError('Failed to update wallet amount.');
+      throw new ReactionError('Failed to update wallet amount.','Failed to update wallet amount.');
     }
   }
   
