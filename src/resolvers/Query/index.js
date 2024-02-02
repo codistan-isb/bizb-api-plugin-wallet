@@ -1,4 +1,4 @@
-import getWalletsByUserId from './getWalletsByUserId.js';
+import getWalletsByUserId from "./getWalletsByUserId.js";
 export default {
-    getWalletsByUserId,
-}
+  getWalletsByUserId,
+};
