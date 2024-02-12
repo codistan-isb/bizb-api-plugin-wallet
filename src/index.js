@@ -12,7 +12,7 @@ import mutations from "./mutations/index.js";
  * @returns {undefined}
  */
 export default async function register(app) {
-  console.log('plugin wallet');
+  console.log("plugin wallet");
   await app.registerPlugin({
     label: pkg.label,
     name: pkg.name,
@@ -24,9 +24,9 @@ export default async function register(app) {
     },
     graphQL: {
       schemas,
-      resolvers
+      resolvers,
     },
-    queries,
+    // queries,
     mutations,
   });
 }

@@ -2,7 +2,7 @@
   "name": "@codistan-isb/bizb-api-plugin-wallet",
   "description": "Reaction API plugin for wallet",
   "label": "Wallet",
-  "version": "0.0.1-development",
+  "version": "1.1.1-development",
   "main": "index.js",
   "type": "module",
   "engines": {
