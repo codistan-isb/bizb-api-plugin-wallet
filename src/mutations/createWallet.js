@@ -2,8 +2,9 @@ import ReactionError from "@reactioncommerce/reaction-error";
 export default async function createWallet(parent, args, context, info) {
   const { collections } = context;
   const { Wallets } = collections;
+  console.log("args", args);
 
-  if (!args.userId || !args.amount || !args.paymentProcessor) {
+  if (!args.userId ||  args.amount === undefined || args.amount === null || !args.paymentProcessor) {
     throw new ReactionError(
       "Invalid Input",
       "Invalid input. Please provide userId, amount, and paymentProcessor."

@@ -26,7 +26,7 @@ export default async function register(app) {
       schemas,
       resolvers,
     },
-    // queries,
+    queries,
     mutations,
   });
 }

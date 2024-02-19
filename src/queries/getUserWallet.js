@@ -1,5 +1,5 @@
 import ReactionError from "@reactioncommerce/reaction-error";
-export default async function getWalletsByUserId(parent, args, context, info) {
+export default async function getUserWallet(parent, args, context, info) {
   const { collections } = context;
   const { Wallets } = collections;
   const { userId } = args;

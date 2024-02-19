@@ -5,12 +5,6 @@ export default async function getWalletsByUserId(parent, args, context, info) {
     throw new ReactionError("access-denied", "Access Denied");
   }
 
-  const wallet = await context.queries.getWalletsByUserId(
-    parent,
-    args,
-    context,
-    info
-  );
-
-  return wallet;
+const wallet = await context.queries.getUserWallet(parent, args, context, info);
+    return wallet;
 }
