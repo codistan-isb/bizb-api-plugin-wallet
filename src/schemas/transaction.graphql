@@ -1,0 +1,44 @@
+"This is the transaction schema in the wallet Plugin"
+type Transaction {
+    "The unique identifier of the transaction"
+    id: ID!
+
+    "The userId of the user associated with the transaction"
+    transactionById: ID!
+
+    "The unique identifier of the order associated with the transaction"
+    orderID: ID!
+
+    "The amount of the transaction"
+    amount: Float!
+
+    "The payment processor used for the transaction"
+    paymentProcessor: String!
+
+    "The status of the transaction"
+    transactionStatus: TransactionStatus!
+
+    "The type of the transaction"
+    transactionType: TransactionType!
+
+    "The reference ID of the transaction"
+    referenceId: Int!
+}
+
+enum TransactionStatus {
+  APPROVED
+  REJECTED
+}
+extend enum PaymentMethodName {
+  "Wallet payment method"
+  wallet
+}
+
+
+type Query {
+  "Get a transaction by its id"
+  transactionById(id: ID!): Transaction
+  "Get all transactions"
+  transactions: [Transaction]
+}
+

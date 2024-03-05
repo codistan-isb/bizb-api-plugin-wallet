@@ -1,4 +1,5 @@
 import ReactionError from "@reactioncommerce/reaction-error";
+
 export default async function makeTransaction(parent, args, context, info) {
   const { collections } = context;
   const { Wallets } = collections;
@@ -33,6 +34,13 @@ export default async function makeTransaction(parent, args, context, info) {
       }
       wallet.amount -= amount;
       wallet.transactions = "outBound";
+      
+      // Move amount to escrow for outbound transaction
+      if (!wallet.escrow) {
+        wallet.escrow = amount;
+      } else {
+        wallet.escrow += amount;
+      }
     } else {
       throw new ReactionError(
         "Invalid transaction type",

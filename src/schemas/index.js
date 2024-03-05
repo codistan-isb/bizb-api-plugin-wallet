@@ -1,6 +1,6 @@
 import importAsString from "@reactioncommerce/api-utils/importAsString.js";
 
-// const product = importAsString("./product.graphql");
-const schema = importAsString("./schema.graphql");
+const wallet = importAsString("./wallet.graphql");
+const transaction = importAsString("./transaction.graphql");
 
-export default [schema];
+export default [wallet, transaction];

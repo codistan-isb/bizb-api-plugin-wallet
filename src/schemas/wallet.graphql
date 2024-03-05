@@ -1,0 +1,89 @@
+"Enum representing the type of transaction."
+enum TransactionType {
+  inBound
+  outBound
+}
+
+"""
+Represents a wallet entity.
+"""
+type wallets implements Node {
+  """
+  The unique identifier of the wallet.
+  """
+  _id: ID!
+
+  """
+  The amount of money in the wallet.
+  """
+  amount: Int
+
+  """
+  The user ID associated with the wallet.
+  """
+  userId: ID
+
+  """
+  The type of transactions made with the wallet.
+  """
+  transactions: TransactionType
+
+  """
+  The payment processor used for the wallet.
+  """
+  paymentProcessor: String
+
+  """
+  The date and time when the wallet was created.
+  """
+  createdAt: DateTime
+
+  """
+  The date and time when the wallet was last updated.
+  """
+  updatedAt: DateTime
+
+    """
+  The amount in escrow for pending transactions.
+  """
+  escrow: Int
+}
+
+"""
+Root query type.
+"""
+type Query {
+  """
+  Get wallets by user ID.
+  """
+  getWalletsByUserId(userId: ID!): [wallets]
+}
+
+"""
+Root mutation type.
+"""
+type Mutation {
+  """
+  Create a new wallet.
+  """
+  createWallet(userId: ID!, amount: Int!, paymentProcessor: String!): wallets
+
+  """
+  Update the amount of a wallet.
+  """
+  updateWalletAmount(userId: ID!, newAmount: Int!): wallets
+
+  """
+  Make a transaction with a wallet.
+  """
+  makeTransaction(
+    userId: ID!
+    transactions: TransactionType!
+    amount: Int!
+  ): wallets
+
+  """
+  Delete a wallet by its ID.
+  """
+  deleteWallet(walletId: ID!): ID
+}
