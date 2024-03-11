@@ -74,7 +74,7 @@ export default async function walletCapturePayment(context, paymentInput) {
         console.log("sellerWallet", sellerWallet);
         if (!sellerWallet) {
           // Create a new wallet for the user
-          const sellerwallet = await Wallets.insert({
+          const sellerwallet = await Wallets.insertOne({
             userId: sellerAccout.userId,
             amount: payment.amount,
             paymentProcessor: "Payment",
@@ -99,7 +99,7 @@ export default async function walletCapturePayment(context, paymentInput) {
         console.log("bizbWallet", bizbWallet);
         if (!bizbWallet) {
           // Create a new wallet for the user
-          await Wallets.insert({
+          await Wallets.insertOne({
             userId: bizbAccount.userId,
             amount: payment.fee,
             paymentProcessor: "Platform fee",
@@ -142,8 +142,8 @@ export default async function walletCapturePayment(context, paymentInput) {
     referenceId: nextReferenceId, // Using the next referenceId
   };
 
-  // Insert the new Transactions record into the Transactions collection
-  const trans =await Transactions.insert(newTransaction);
+  // insertOne the new Transactions record into the Transactions collection
+  const trans =await Transactions.insertOne(newTransaction);
   console.log("newTransaction", trans);
   return { saved: true, response: {newTransaction} };
 }
