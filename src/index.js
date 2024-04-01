@@ -30,7 +30,10 @@ export default async function register(app) {
       },
       Transactions:{
         name:"Transactions"
-      }
+      },
+      Redemption:{
+        name:"Redemption"
+      },
     },
     graphQL: {
       schemas,

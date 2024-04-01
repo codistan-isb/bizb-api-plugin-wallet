@@ -43,10 +43,25 @@ type wallets implements Node {
   """
   updatedAt: DateTime
 
-    """
+  """
   The amount in escrow for pending transactions.
   """
   escrow: Int
+}
+enum RedemptionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+type RedemptionRequest {
+  _id: ID!
+  userId: ID!
+  RedemptionAmount: Float!
+  status: RedemptionStatus!
+  createdAt: String!
+  updatedAt: String!
+  referenceId: String
 }
 
 """
@@ -57,6 +72,8 @@ type Query {
   Get wallets by user ID.
   """
   getWalletsByUserId(userId: ID!): [wallets]
+
+  getAllRedemptionRequests: [RedemptionRequest]
 }
 
 """
@@ -86,4 +103,9 @@ type Mutation {
   Delete a wallet by its ID.
   """
   deleteWallet(walletId: ID!): ID
+
+  requestRedemption(userId: ID!, amount: Float!): RedemptionRequest
+
+  approveRedemptionRequest(userId: ID!): RedemptionRequest
+  rejectRedemptionRequest(userId: ID!): RedemptionRequest
 }
