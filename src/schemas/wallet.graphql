@@ -2,6 +2,7 @@
 enum TransactionType {
   inBound
   outBound
+  redemption
 }
 
 """
@@ -59,8 +60,8 @@ type RedemptionRequest {
   userId: ID!
   RedemptionAmount: Float!
   status: RedemptionStatus!
-  createdAt: String!
-  updatedAt: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   referenceId: String
 }
 
@@ -106,6 +107,6 @@ type Mutation {
 
   requestRedemption(userId: ID!, amount: Float!): RedemptionRequest
 
-  approveRedemptionRequest(userId: ID!): RedemptionRequest
-  rejectRedemptionRequest(userId: ID!): RedemptionRequest
+  approveRedemptionRequest(_id: ID!, userId: ID!): RedemptionRequest
+  rejectRedemptionRequest(_id: ID!, userId: ID!): RedemptionRequest
 }
