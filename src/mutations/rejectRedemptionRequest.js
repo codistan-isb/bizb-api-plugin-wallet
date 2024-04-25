@@ -1,28 +1,31 @@
 import ReactionError from "@reactioncommerce/reaction-error";
+import pkg from 'mongodb'; // or ObjectID 
+const {ObjectId}=pkg;
 export default async function rejectRedemptionRequest(parent, args, context) {
 
     const { collections } = context;
     const { Redemption, Wallets } = collections;
-    const userId = args.userId;
+    const _id = args._id;
+    const userId = args.userId
     console.log("args", args);
-    console.log("_id", userId);
-    const redemption = await Redemption.findOne({ userId:userId});
+    console.log("_id", _id);
+    const redemption = await Redemption.findOne({ _id: new ObjectId(_id)});
     console.log("redemption", redemption);
     if (!redemption) {
         throw new Error("Redemption request not found");
     }
    if(redemption.status === "REJECTED" || redemption.status === "APPROVED"){
-         throw new Error("Redemption request already" + redemption.status);
+         throw new Error("Redemption request already " + redemption.status);
     }
    const updateRedemption =  await Redemption.updateOne(
-    { userId },
+    { _id: new ObjectId(_id) },
     { $set: { status: "REJECTED" } }
 );
    console.log("updateRedemption", updateRedemption);
    if (updateRedemption.nModified === 0) {
     throw new Error("Failed to update redemption request");
 }
-const redemptionUser =  await Redemption.findOne({ userId:userId});
+const redemptionUser =  await Redemption.findOne({ _id: new ObjectId(_id)});
 
     // Deduct the redeemed amount from the user's wallet
     const WalletuserId = redemption.userId;
